@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groups – TuniGuide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#005BBB',
+            brandRed: '#E60023',
+            brandSand: '#F7F2EB'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+            poppins: ['Poppins', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-inter bg-brandSand text-gray-800">
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="assets/images/logo.jpg" alt="TuniGuide" class="w-10 h-10 rounded-lg object-cover border border-brandBlue/20 shadow-sm"/>
+        <span class="font-bold text-lg">TuniGuide</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="onboarding.html" class="hover:text-brandBlue transition">Get Started</a>
+        <a href="map.html" class="hover:text-brandBlue transition">Map</a>
+        <a href="place-details.html" class="hover:text-brandBlue transition">Places</a>
+        <a href="guides.html" class="hover:text-brandBlue transition">Guides</a>
+        <a href="groups.html" class="hover:text-brandBlue transition">Groups</a>
+        <a href="dashboard.html" class="hover:text-brandBlue transition">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-2xl font-bold mb-6">Groups</h1>
+    <div id="groupsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- cards via JS -->
+    </div>
+  </main>
+
+  <script src="js/groups.js"></script>
+</body>
+</html>

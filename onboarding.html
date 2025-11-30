@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding – TuniGuide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#005BBB',
+            brandRed: '#E60023',
+            brandSand: '#F7F2EB'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+            poppins: ['Poppins', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-inter bg-brandSand text-gray-800">
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="assets/images/logo.jpg" alt="TuniGuide" class="w-10 h-10 rounded-lg object-cover border border-brandBlue/20 shadow-sm"/>
+        <span class="font-bold text-lg">TuniGuide</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="onboarding.html" class="hover:text-brandBlue transition">Get Started</a>
+        <a href="map.html" class="hover:text-brandBlue transition">Map</a>
+        <a href="place-details.html" class="hover:text-brandBlue transition">Places</a>
+        <a href="guides.html" class="hover:text-brandBlue transition">Guides</a>
+        <a href="groups.html" class="hover:text-brandBlue transition">Groups</a>
+        <a href="dashboard.html" class="hover:text-brandBlue transition">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="relative rounded-3xl bg-white shadow-2xl border border-gray-200 p-6 sm:p-8 overflow-hidden">
+      <!-- Decorative blobs -->
+      <div class="pointer-events-none absolute -top-20 -left-20 w-64 h-64 rounded-full bg-brandBlue/10 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-28 -right-24 w-80 h-80 rounded-full bg-brandRed/10 blur-3xl"></div>
+
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-bold">Personalize your journey</h1>
+          <p class="text-sm text-gray-600">Make TuniGuide yours in under a minute.</p>
+        </div>
+        <div id="progress" class="hidden sm:flex items-center gap-3">
+          <div class="h-2 w-48 bg-gray-200 rounded-full overflow-hidden">
+            <div id="progressBar" class="h-2 bg-gradient-to-r from-brandBlue to-brandRed rounded-full w-0 transition-all"></div>
+          </div>
+          <p id="stepLabel" class="text-xs text-gray-600">Step 1 of 5</p>
+        </div>
+      </div>
+
+      <form id="onboardingForm" class="space-y-6">
+        <!-- Step container -->
+        <div id="stepsContainer" class="min-h-[320px]">
+          <!-- Steps injected via JS -->
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex items-center justify-between pt-2">
+          <button type="button" id="prevBtn" class="px-4 py-2 rounded-full border border-gray-300 hover:border-brandBlue hover:bg-brandSand transition disabled:opacity-50" disabled>
+            ← Back
+          </button>
+          <div class="flex gap-3">
+            <button type="button" id="skipBtn" class="px-4 py-2 rounded-full border border-gray-300 hover:border-brandBlue hover:bg-brandSand transition">Skip</button>
+            <button type="button" id="nextBtn" class="px-6 py-2 rounded-full bg-brandBlue text-white shadow hover:shadow-lg hover:bg-brandRed transition">
+              Next →
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="js/onboarding.js"></script>
+</body>
+</html>

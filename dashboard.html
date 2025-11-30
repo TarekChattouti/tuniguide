@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – TuniGuide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#005BBB',
+            brandRed: '#E60023',
+            brandSand: '#F7F2EB'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+            poppins: ['Poppins', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-inter bg-brandSand text-gray-800">
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="assets/images/logo.jpg" alt="TuniGuide" class="w-10 h-10 rounded-lg object-cover border border-brandBlue/20 shadow-sm"/>
+        <span class="font-bold text-lg">TuniGuide</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="onboarding.html" class="hover:text-brandBlue transition">Get Started</a>
+        <a href="map.html" class="hover:text-brandBlue transition">Map</a>
+        <a href="place-details.html" class="hover:text-brandBlue transition">Places</a>
+        <a href="guides.html" class="hover:text-brandBlue transition">Guides</a>
+        <a href="groups.html" class="hover:text-brandBlue transition">Groups</a>
+        <a href="dashboard.html" class="hover:text-brandBlue transition">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
+    <div class="grid lg:grid-cols-3 gap-6">
+      <!-- Stats Cards -->
+      <div class="rounded-2xl bg-white p-6 shadow border border-gray-200">
+        <p class="text-sm text-gray-500">Total Users</p>
+        <p id="statUsers" class="text-3xl font-bold">0</p>
+      </div>
+      <div class="rounded-2xl bg-white p-6 shadow border border-gray-200">
+        <p class="text-sm text-gray-500">Active Guides</p>
+        <p id="statGuides" class="text-3xl font-bold">0</p>
+      </div>
+      <div class="rounded-2xl bg-white p-6 shadow border border-gray-200">
+        <p class="text-sm text-gray-500">Groups</p>
+        <p id="statGroups" class="text-3xl font-bold">0</p>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-6 mt-6">
+      <!-- Chart -->
+      <div class="rounded-2xl bg-white p-6 shadow border border-gray-200">
+        <p class="font-semibold mb-3">Weekly Sign-ups</p>
+        <div class="h-48 relative">
+          <canvas id="chartCanvas" class="w-full h-full"></canvas>
+        </div>
+      </div>
+      <!-- Table -->
+      <div class="rounded-2xl bg-white p-6 shadow border border-gray-200">
+        <p class="font-semibold mb-3">Recent Reviews</p>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm">
+            <thead>
+              <tr class="text-left text-gray-600">
+                <th class="py-2">User</th>
+                <th class="py-2">Place</th>
+                <th class="py-2">Rating</th>
+                <th class="py-2">Text</th>
+              </tr>
+            </thead>
+            <tbody id="reviewsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

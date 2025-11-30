@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TuniGuide – Personalized Tunisian Travel Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#005BBB">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#005BBB',
+            brandRed: '#E60023',
+            brandSand: '#F7F2EB'
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+            poppins: ['Poppins', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <meta name="description" content="TuniGuide: A personalized travel guide for Tunisia with interactive maps, curated places, guides, and groups." />
+</head>
+<body class="font-inter bg-brandSand text-gray-800">
+  <!-- Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2">
+          <img src="assets/images/logo.jpg" alt="TuniGuide" class="w-10 h-10 rounded-lg object-cover border border-brandBlue/20 shadow-sm"/>
+          <span class="font-bold text-lg">TuniGuide</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="onboarding.html" class="hover:text-brandBlue transition">Get Started</a>
+          <a href="map.html" class="hover:text-brandBlue transition">Map</a>
+          <a href="place-details.html" class="hover:text-brandBlue transition">Places</a>
+          <a href="guides.html" class="hover:text-brandBlue transition">Guides</a>
+          <a href="groups.html" class="hover:text-brandBlue transition">Groups</a>
+          <a href="dashboard.html" class="hover:text-brandBlue transition">Dashboard</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="onboarding.html" class="hidden sm:inline-block px-4 py-2 rounded-full bg-brandBlue text-white hover:bg-brandRed transition shadow">Personalize</a>
+          <button id="menuBtn" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-gray-300 hover:border-brandBlue transition">
+            <span class="sr-only">Open menu</span>
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden max-h-0 overflow-hidden transition-all duration-300">
+      <div class="px-4 pb-4 space-y-2">
+        <a href="onboarding.html" class="block px-3 py-2 rounded-lg hover:bg-brandSand">Get Started</a>
+        <a href="map.html" class="block px-3 py-2 rounded-lg hover:bg-brandSand">Map</a>
+        <a href="place-details.html" class="block px-3 py-2 rounded-lg hover:bg-brandSand">Places</a>
+        <a href="guides.html" class="block px-3 py-2 rounded-lg hover:bg-brandSand">Guides</a>
+        <a href="groups.html" class="block px-3 py-2 rounded-lg hover:bg-brandSand">Groups</a>
+        <a href="dashboard.html" class="block px-3 py-2 rounded-lg hover:bg-brandSand">Dashboard</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="pt-28 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6 animate-fade-in">
+          <h1 class="font-poppins text-4xl sm:text-5xl font-extrabold leading-tight">
+            Discover Tunisia your way
+          </h1>
+          <p class="text-lg text-gray-600">
+            Build a personalized itinerary with local insights, interactive maps, and curated experiences across Tunisia.
+          </p>
+          <div class="flex gap-3">
+            <a href="onboarding.html" class="px-6 py-3 rounded-full bg-brandRed text-white shadow hover:bg-brandBlue transition">Start Personalization</a>
+            <a href="#features" class="px-6 py-3 rounded-full border border-gray-300 hover:border-brandBlue transition">Explore Features</a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-video rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+            <img src="assets/images/hero.jpg" alt="Tunisia landscape" class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow p-4 border border-gray-200 animate-slide-in">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-brandBlue/10 flex items-center justify-center text-brandBlue">📍</div>
+              <div>
+                <p class="font-semibold">Personalized Map</p>
+                <p class="text-sm text-gray-500">Interactive markers and highlights</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold mb-8">Features</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="rounded-2xl bg-white p-6 shadow border border-gray-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-brandBlue/10 text-brandBlue flex items-center justify-center mb-4">🧭</div>
+          <h3 class="font-semibold mb-2">Smart Onboarding</h3>
+          <p class="text-gray-600">Multi-step wizard tailors your trip based on your interests, food, and budget.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow border border-gray-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-brandRed/10 text-brandRed flex items-center justify-center mb-4">🗺️</div>
+          <h3 class="font-semibold mb-2">Interactive Map</h3>
+          <p class="text-gray-600">Explore places with animated markers, hover tooltips, and smooth zoom.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow border border-gray-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-brandBlue/10 text-brandBlue flex items-center justify-center mb-4">🏖️</div>
+          <h3 class="font-semibold mb-2">Curated Places</h3>
+          <p class="text-gray-600">Rich cards with photos, activities, transport info, and genuine reviews.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow border border-gray-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-brandRed/10 text-brandRed flex items-center justify-center mb-4">👥</div>
+          <h3 class="font-semibold mb-2">Local Guides</h3>
+          <p class="text-gray-600">Connect with experienced guides fluent in multiple languages.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow border border-gray-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-brandBlue/10 text-brandBlue flex items-center justify-center mb-4">🧑‍🤝‍🧑</div>
+          <h3 class="font-semibold mb-2">Groups & Activities</h3>
+          <p class="text-gray-600">Join groups around hiking, food tours, heritage walks, and more.</p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow border border-gray-200 hover:shadow-lg transition">
+          <div class="w-12 h-12 rounded-lg bg-brandRed/10 text-brandRed flex items-center justify-center mb-4">📊</div>
+          <h3 class="font-semibold mb-2">Dashboard</h3>
+          <p class="text-gray-600">Admin overview with stats, tables, and charts for hackathon demo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-3xl bg-white p-8 shadow-xl border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Ready to personalize your Tunisian journey?</h3>
+          <p class="text-gray-600">Answer a few questions and get your custom map and recommendations.</p>
+        </div>
+        <a href="onboarding.html" class="px-6 py-3 rounded-full bg-brandBlue text-white hover:bg-brandRed transition shadow">Start Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-gray-200 bg-white py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 text-sm">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-brandBlue text-white">TG</span>
+            <span class="font-semibold">TuniGuide</span>
+          </div>
+          <p class="text-gray-600">Personalized travel guide for Tunisia. Hackathon demo.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-2">Explore</p>
+          <ul class="space-y-1">
+            <li><a href="map.html" class="hover:text-brandBlue">Map</a></li>
+            <li><a href="place-details.html" class="hover:text-brandBlue">Places</a></li>
+            <li><a href="guides.html" class="hover:text-brandBlue">Guides</a></li>
+            <li><a href="groups.html" class="hover:text-brandBlue">Groups</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold mb-2">Get Started</p>
+          <ul class="space-y-1">
+            <li><a href="onboarding.html" class="hover:text-brandBlue">Personalize</a></li>
+            <li><a href="#features" class="hover:text-brandBlue">Features</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-semibold mb-2">Follow</p>
+          <ul class="space-y-1">
+            <li><a href="#" class="hover:text-brandBlue">Twitter</a></li>
+            <li><a href="#" class="hover:text-brandBlue">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-8 text-xs text-gray-500">© 2025 TuniGuide. For hackathon demo purposes only.</div>
+    </div>
+  </footer>
+
+  <!-- Loading Splash (stable, 3s) -->
+  <div id="vibeSplash" class="fixed inset-0 z-[60] hidden items-center justify-center bg-brandSand">
+    <div class="relative flex items-center justify-center">
+      <div class="loading-card w-44 h-44 rounded-3xl bg-white shadow-xl border border-gray-200 flex items-center justify-center">
+        <div class="relative">
+          <img src="assets/images/loading.jpg" alt="Loading" class="w-24 h-24 rounded-full object-cover animate-breathe" />
+          <!-- Animated ring -->
+          <span class="absolute inset-0 -m-2 rounded-full ring-2 ring-brandBlue/40 animate-spin-slow"></span>
+          <!-- Shine sweep -->
+          <span class="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+            <span class="shine absolute -left-1/2 top-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Start Personalization Modal -->
+  <div id="ctaModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-xl border border-gray-200 max-w-md w-full overflow-hidden">
+      <div class="p-5 space-y-3">
+        <div class="flex items-center gap-3">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-brandRed text-white">🎒</span>
+          <div>
+            <p class="text-lg font-semibold">Personalize your trip</p>
+            <p class="text-sm text-gray-600">Answer a few quick questions to tailor recommendations.</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button id="ctaDismiss" class="px-4 py-2 rounded-full border border-gray-300 hover:border-brandBlue transition">Maybe later</button>
+          <a id="ctaStart" href="onboarding.html" class="px-5 py-2 rounded-full bg-brandBlue text-white hover:bg-brandRed transition shadow">Start Personalization</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
