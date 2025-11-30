@@ -93,9 +93,12 @@ function init() {
   const API_KEY = 'AIzaSyDhEet3ff3IYoXCKkXW1oZAvMJMnW-l3p8';
   async function callGemini(prompt) {
     try {
-      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + API_KEY, {
+      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-goog-api-key': API_KEY
+        },
         body: JSON.stringify({
           contents: [
             { role: 'user', parts: [{ text: prompt }] }

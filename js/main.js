@@ -170,3 +170,131 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 })();
+
+// Global floating AI chat widget (bottom-right)
+(function initGlobalChat() {
+  // Inject styles
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .tg-chat-fab { position: fixed; right: 16px; bottom: 16px; z-index: 60; }
+    .tg-chat-fab button { box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+    .tg-chat-modal { position: fixed; inset: 0; z-index: 70; display: none; align-items: center; justify-content: flex-end; }
+    .tg-chat-panel { width: 360px; max-width: 92vw; margin: 0 16px 16px; }
+    @media (min-width: 1024px) { .tg-chat-panel { margin-right: 24px; margin-bottom: 24px; } }
+  `;
+  document.head.appendChild(style);
+
+  // Floating button
+  if (!document.querySelector('#tgChatFab')) {
+    const fab = document.createElement('div');
+    fab.id = 'tgChatFab';
+    fab.className = 'tg-chat-fab';
+    fab.innerHTML = `
+      <button aria-label="Chat with AI" class="rounded-full bg-brandBlue text-white w-14 h-14 flex items-center justify-center hover:bg-brandRed transition">
+        💬
+      </button>
+    `;
+    document.body.appendChild(fab);
+  }
+
+  // Chat modal/panel
+  if (!document.querySelector('#tgChatModal')) {
+    const modal = document.createElement('div');
+    modal.id = 'tgChatModal';
+    modal.className = 'tg-chat-modal';
+    modal.innerHTML = `
+      <div class="tg-chat-panel rounded-2xl bg-white shadow-2xl border border-gray-200 overflow-hidden">
+        <div class="p-4 border-b flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <img src="assets/images/logo.jpg" alt="TuniGuide" class="w-8 h-8 rounded-lg object-cover border border-brandBlue/20"/>
+            <div>
+              <p class="font-semibold">TuniGuide AI</p>
+              <p class="text-xs text-gray-600">Ask about Tunisia: places, routes, culture, weather.</p>
+            </div>
+          </div>
+          <button id="tgChatClose" class="px-2 py-1 rounded-lg border hover:border-brandBlue">Close</button>
+        </div>
+        <div id="tgChatBody" class="p-3 space-y-3 max-h-[50vh] overflow-y-auto">
+          <div class="text-xs text-gray-600">Tips: try "3-day itinerary Tunis + Sidi Bou Said", "best beaches near Sousse", or "desert tour options from Tozeur".</div>
+        </div>
+        <div class="p-3 flex gap-2 border-t">
+          <input id="tgChatInput" type="text" placeholder="Type your question…" class="flex-1 px-3 py-2 rounded-lg border focus:outline-none" />
+          <button id="tgChatSend" class="px-3 py-2 rounded-lg bg-brandBlue text-white hover:bg-brandRed">Send</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  const fabBtn = document.querySelector('#tgChatFab button');
+  const modalEl = document.getElementById('tgChatModal');
+  const closeBtn = document.getElementById('tgChatClose');
+  const bodyEl = document.getElementById('tgChatBody');
+  const inputEl = document.getElementById('tgChatInput');
+  const sendBtn = document.getElementById('tgChatSend');
+
+  function openChat() {
+    modalEl.style.display = 'flex';
+  }
+  function closeChat() {
+    modalEl.style.display = 'none';
+  }
+  if (fabBtn) fabBtn.addEventListener('click', openChat);
+  if (closeBtn) closeBtn.addEventListener('click', closeChat);
+
+  const API_KEY = 'AIzaSyDhEet3ff3IYoXCKkXW1oZAvMJMnW-l3p8';
+  async function callGemini(prompt) {
+    try {
+      const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-goog-api-key': API_KEY
+        },
+        body: JSON.stringify({ contents: [{ role: 'user', parts: [{ text: prompt }]}] })
+      });
+      const data = await res.json();
+      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'No response.';
+      return text;
+    } catch (e) {
+      return 'Error contacting AI.';
+    }
+  }
+
+  async function sendMessage(msg) {
+    const user = document.createElement('div');
+    user.className = 'text-sm p-2 rounded-lg bg-brandBlue/10';
+    user.textContent = msg;
+    bodyEl.appendChild(user);
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+
+    const thinking = document.createElement('div');
+    thinking.className = 'text-xs text-gray-500';
+    thinking.textContent = 'Assistant is typing…';
+    bodyEl.appendChild(thinking);
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+
+    const context = localStorage.getItem('tuniguide_prefs');
+    const prefix = context ? `User preferences: ${context}. ` : '';
+    const reply = await callGemini(prefix + msg);
+    thinking.remove();
+
+    const bot = document.createElement('div');
+    bot.className = 'text-sm p-2 rounded-lg bg-white border';
+    bot.textContent = reply;
+    bodyEl.appendChild(bot);
+    bodyEl.scrollTop = bodyEl.scrollHeight;
+  }
+
+  if (sendBtn && inputEl) {
+    sendBtn.addEventListener('click', () => {
+      const msg = inputEl.value.trim();
+      if (!msg) return;
+      inputEl.value = '';
+      sendMessage(msg);
+    });
+    inputEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendBtn.click();
+    });
+  }
+})();
